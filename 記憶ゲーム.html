@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>記憶ゲーム</title>
+<style>
+form {
+	width:350px;
+	margin:0 auto;
+	text-align:center;
+}
+#mondai {
+	overflow:hidden;
+	margin-bottom:1em;
+}
+#mondai div {
+	float:left;
+	width:66px;
+	height:66px;
+	border:2px solid #ccc;
+	background:#fff;
+}
+</style>
+<script>
+window.onload=function(){
+	function kiokugame() {
+		var mondai;
+		var answer;
+		var l = 25;
+
+		function init() {
+			mondai = [];
+			document.getElementById('mondai').innerHTML = '';
+			for (var i = 0; i < l; ++i) {
+				mondai.push(Math.random() > 0.5);
+				var div = document.createElement('div');
+				div.style.background = (mondai[i] ? '#c00' : '#fff');
+				document.getElementById('mondai').appendChild(div);
+			}
+			setTimeout(init2, 3000);
+		}
+
+		function init2() {
+			answer = [];
+			for (var i = 0; i < l; ++i) {
+				answer.push(false);
+				init3(i);
+			}
+			document.getElementById('check').style.display = 'inline';
+		}
+
+		function init3(i) {
+			document.getElementById('mondai').getElementsByTagName('div')[i].style.background = '#fff';
+			document.getElementById('mondai').getElementsByTagName('div')[i].addEventListener('click', function () {
+				answer1(i);
+			});
+		}
+
+		function answer1(i) {
+			answer[i] = !answer[i];
+			document.getElementById('mondai').getElementsByTagName('div')[i].style.background = (answer[i] ? '#c00' : '#fff');
+		}
+
+		function check() {
+			if (mondai.join() == answer.join()) {
+				alert('正解です。');
+			} else {
+				for (var i = 0; i < mondai.length; ++i) {
+					if (mondai[i]) {
+						document.getElementById('mondai').getElementsByTagName('div')[i].style.background = '#f00';
+					}
+				}
+				alert('不正解です。');
+			}
+		}
+
+		document.getElementById('start').addEventListener('click', init);
+		document.getElementById('check').addEventListener('click', check);
+	}
+	kiokugame();
+}
+</script>
+</head>
+<body>
+	<form name="form1">
+		<p>
+			<button type="button" id="start">start</button>
+		</p>
+		<div id="mondai">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+		<p>
+			<button type="button" id="check" style="display:none;">回答</button>
+		</p>
+	</form>
+</body>
+</html>

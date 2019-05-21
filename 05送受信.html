@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<body>
+
+  <form name="name">
+  あなたの名前 : <input type="text" name="txt" value=""><br>
+  <input type="button" value="送信" onclick="textbox()"><br>
+  </form>
+
+  <script>
+  function textbox()
+  {
+    var yourname = document.name.txt.value;
+    alert("こんにちは、"+ yourname + "さん");
+    alert("体験講座へようこそ")
+  }
+
+  </script>
+<body>
+</html>
